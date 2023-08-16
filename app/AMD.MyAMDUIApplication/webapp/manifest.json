@@ -1,0 +1,196 @@
+{
+    "_version": "1.48.0",
+    "sap.app": {
+        "id": "AMD.MyAMDUIApplication",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:lrop",
+            "version": "1.10.4",
+            "toolsId": "3f594fbe-7ecd-4bcb-8d4e-2933c4ec84d8"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/service/AMD/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "4.0"
+                }
+            }
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "AMD-MyAMDUIApplication-inbound": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "AMDMyAMDUIApplication",
+                    "action": "display",
+                    "title": "{{flpTitle}}",
+                    "subTitle": "{{flpSubtitle}}",
+                    "icon": ""
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.108.7",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.ushell": {},
+                "sap.fe.templates": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "AMD.MyAMDUIApplication.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "synchronizationMode": "None",
+                    "operationMode": "Server",
+                    "autoExpandSelect": true,
+                    "earlyRequests": true
+                }
+            },
+            "@i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "uri": "i18n/i18n.properties"
+            }
+        },
+        "resources": {
+            "css": []
+        },
+        "routing": {
+            "routes": [
+                {
+                    "pattern": ":?query:",
+                    "name": "AMDDetailsList",
+                    "target": "AMDDetailsList"
+                },
+                {
+                    "pattern": "AMDDetails({key}):?query:",
+                    "name": "AMDDetailsObjectPage",
+                    "target": "AMDDetailsObjectPage"
+                }
+            ],
+            "targets": {
+                "AMDDetailsList": {
+                    "type": "Component",
+                    "id": "AMDDetailsList",
+                    "name": "sap.fe.templates.ListReport",
+                    "options": {
+                        "settings": {
+                            "entitySet": "AMDDetails",
+                            "variantManagement": "Page",
+                            "navigation": {
+                                "AMDDetails": {
+                                    "detail": {
+                                        "route": "AMDDetailsObjectPage"
+                                    }
+                                }
+                            },
+                            "initialLoad": "Enabled",
+                            "controlConfiguration": {
+                                "@com.sap.vocabularies.UI.v1.LineItem": {
+                                    "columns": {
+                                        "DataField::NO_OF_ASSETS": {
+                                            "width": "150px"
+                                        },
+                                        "DataField::AMD_ID": {
+                                            "width": "300px"
+                                        },
+                                        "DataField::MRC": {
+                                            "width": "150px"
+                                        },
+                                        "DataField::LE": {
+                                            "width": "150px"
+                                        },
+                                        "DataField::STATUS": {
+                                            "width": "200px"
+                                        },
+                                        "DataField::CREATED_BY": {
+                                            "width": "200px"
+                                        },
+                                        "DataField::CREATED_ON": {
+                                            "width": "200px"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "AMDDetailsObjectPage": {
+                    "type": "Component",
+                    "id": "AMDDetailsObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "editableHeaderContent": false,
+                            "entitySet": "AMDDetails",
+                            "content": {
+                                "header": {
+                                    "actions": {
+                                        "SUBMIT": {
+                                            "press": "AMD.MyAMDUIApplication.ext.controller.SUBMIT.SUBMIT",
+                                            "visible": true,
+                                            "enabled": true,
+                                            "text": "Submit"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "extends": {
+            "extensions": {
+                "sap.ui.controllerExtensions": {}
+            }
+        }
+    },
+    "sap.fiori": {
+        "registrationIds": [],
+        "archeType": "transactional"
+    }
+}
